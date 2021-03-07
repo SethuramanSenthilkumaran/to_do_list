@@ -1,4 +1,5 @@
 //jshint esversion:6
+require("dotenv").config();
 const ejs = require("ejs");
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -13,7 +14,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 //conection
-mongoose.connect("mongodb+srv://admin-sethu:Test123@cluster0.plkds.mongodb.net/todolistDB", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+mongoose.connect(process.env.mongodb_atlas_link, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
 //schema
 const itemsSchema = new mongoose.Schema({
     name: String
@@ -30,7 +31,7 @@ const item2 = new Item({
 const item3 = new Item({
     name: "<--- Hit this to delete an item."
 });
-const defaultItems = [item1,item2,item3];
+const defaultItems = [item1, item2, item3];
 
 
 //schema
